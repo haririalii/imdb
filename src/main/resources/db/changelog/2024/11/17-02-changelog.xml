@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1731869585951-1" author="Ali Hariri">
+        <createTable tableName="title_principals">
+            <column name="id" type="VARCHAR(2048)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_title_principals"/>
+            </column>
+            <column name="ordering" type="INT"/>
+            <column name="nconst" type="VARCHAR(2048)"/>
+            <column name="category" type="VARCHAR(2048)"/>
+            <column name="job" type="VARCHAR(2048)"/>
+            <column name="tconst" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731869585951-2" author="Ali Hariri">
+        <createTable tableName="title_principals_characters">
+            <column name="principal_id" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="character" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731869585951-3" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="tconst" baseTableName="title_principals"
+                                 constraintName="FK_TITLE_PRINCIPALS_ON_TCONST" referencedColumnNames="tconst"
+                                 referencedTableName="title_basics"/>
+    </changeSet>
+    <changeSet id="1731869585951-4" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="principal_id" baseTableName="title_principals_characters"
+                                 constraintName="fk_title_principals_characters_on_title_principals"
+                                 referencedColumnNames="id" referencedTableName="title_principals"/>
+    </changeSet>
+
+</databaseChangeLog>

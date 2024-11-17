@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1731843325202-1" author="Ali Hariri">
+        <createTable tableName="known_for_titles">
+            <column name="nconst" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-2" author="Ali Hariri">
+        <createTable tableName="name_basics">
+            <column name="nconst" type="VARCHAR(2048)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_name_basics"/>
+            </column>
+            <column name="primary_name" type="VARCHAR(2048)"/>
+            <column name="birth_year" type="INT"/>
+            <column name="death_year" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-3" author="Ali Hariri">
+        <createTable tableName="primary_professions">
+            <column name="nconst" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profession" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-4" author="Ali Hariri">
+        <createTable tableName="title_basics">
+            <column name="tconst" type="VARCHAR(2048)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_title_basics"/>
+            </column>
+            <column name="title_type" type="VARCHAR(2048)"/>
+            <column name="primary_title" type="VARCHAR(2048)"/>
+            <column name="original_title" type="VARCHAR(2048)"/>
+            <column name="is_adult" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_year" type="INT"/>
+            <column name="end_year" type="INT"/>
+            <column name="runtime_minutes" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-5" author="Ali Hariri">
+        <createTable tableName="title_crew">
+            <column name="tconst" type="VARCHAR(2048)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_title_crew"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-6" author="Ali Hariri">
+        <createTable tableName="title_directors">
+            <column name="tconst" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="director" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-7" author="Ali Hariri">
+        <createTable tableName="title_genres">
+            <column name="tconst" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genre" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-8" author="Ali Hariri">
+        <createTable tableName="title_ratings">
+            <column name="tconst" type="VARCHAR(2048)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_title_ratings"/>
+            </column>
+            <column name="average_rating" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_votes" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1731843325202-9" author="Ali Hariri">
+        <createTable tableName="title_writers">
+            <column name="tconst" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="writer" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1731843325202-11" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="tconst" baseTableName="title_ratings"
+                                 constraintName="FK_TITLE_RATINGS_ON_TCONST" referencedColumnNames="tconst"
+                                 referencedTableName="title_basics"/>
+    </changeSet>
+    <changeSet id="1731843325202-12" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="nconst" baseTableName="known_for_titles"
+                                 constraintName="fk_known_for_titles_on_name_basics" referencedColumnNames="nconst"
+                                 referencedTableName="name_basics"/>
+    </changeSet>
+    <changeSet id="1731843325202-13" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="nconst" baseTableName="primary_professions"
+                                 constraintName="fk_primary_professions_on_name_basics" referencedColumnNames="nconst"
+                                 referencedTableName="name_basics"/>
+    </changeSet>
+    <changeSet id="1731843325202-14" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="tconst" baseTableName="title_directors"
+                                 constraintName="fk_title_directors_on_title_crew" referencedColumnNames="tconst"
+                                 referencedTableName="title_crew"/>
+    </changeSet>
+    <changeSet id="1731843325202-15" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="tconst" baseTableName="title_genres"
+                                 constraintName="fk_title_genres_on_title_basics" referencedColumnNames="tconst"
+                                 referencedTableName="title_basics"/>
+    </changeSet>
+    <changeSet id="1731843325202-16" author="Ali Hariri">
+        <addForeignKeyConstraint baseColumnNames="tconst" baseTableName="title_writers"
+                                 constraintName="fk_title_writers_on_title_crew" referencedColumnNames="tconst"
+                                 referencedTableName="title_crew"/>
+    </changeSet>
+
+</databaseChangeLog>

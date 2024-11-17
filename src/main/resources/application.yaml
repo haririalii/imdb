@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: imdb
+  servlet:
+    multipart:
+      max-file-size: 2000MB
+      max-request-size: 2000MB
+  jpa:
+    database: h2
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:imdb
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+server:
+  servlet:
+    context-path: /api
