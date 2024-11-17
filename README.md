@@ -47,7 +47,7 @@ The application follows a layered architecture:
 ### Steps
 1. Clone the repository:
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/haririalii/imdb
     cd imdb
     ```
 2. Install dependencies using Maven:
