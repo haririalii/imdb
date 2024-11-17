@@ -83,7 +83,7 @@ Configuration for the application can be customized in the `application.yaml` fi
 
 ## Endpoints
 ### Import and Data Management
-- **POST /api/import/title_ratings**: Imports the dataset into the application.
+- **POST /api/import/{data_type}**: Imports the specified dataset into the application. Replace `{data_type}` with the type of dataset you are importing (e.g., `title_ratings`).
   
   Example:
   ```sh
