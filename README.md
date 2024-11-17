@@ -30,7 +30,6 @@ The project leverages the following technologies and frameworks:
 - **Lombok**: Reduces boilerplate code for model classes.
 - **Maven**: Dependency management and build automation.
 - **H2 Database**: In-memory database for development and testing.
-- **Actuator**: For monitoring and managing the application in production.
 
 ## Architecture
 The application follows a layered architecture:
@@ -60,7 +59,7 @@ To run the application locally:
 ```sh
 mvn spring-boot:run
 ```
-The application will start on `http://localhost:8080`.
+The application will start on `http://localhost:8080/api`.
 
 ## Configuration
 Configuration for the application can be customized in the `application.yaml` file located in `src/main/resources/`. Key configurations include:
@@ -83,7 +82,7 @@ Configuration for the application can be customized in the `application.yaml` fi
 
 ## Endpoints
 ### Import and Data Management
-- **POST /api/import/{data_type}**: Imports the specified dataset into the application. Replace `{data_type}` with the type of dataset you are importing (e.g., `title_ratings`).
+- **POST /api/import/{data_type}**: Imports the specified dataset into the application. The API supports IMDB TSV datasets. Replace `{data_type}` with the type of dataset you are importing (e.g., `title_ratings`). The list of supported data types can be obtained from the `com.lobox.imdb.service.importer.AbstractImporter.getType` method.
   
   Example:
   ```sh
